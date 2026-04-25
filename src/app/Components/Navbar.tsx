@@ -15,7 +15,7 @@ const Navbar = () => {
             <li key={item}>
               <a
                 href="#"
-                className="relative px-4 py-2 text-sm font-medium text-black-50/50 hover:text-black transition-colors duration-200 rounded-lg hover:bg-violet-500/10 group block"
+                className="relative px-4 py-2 text-sm font-medium text-gray-700 hover:text-black transition-colors duration-200 rounded-lg hover:bg-violet-500/10 group block"
               >
                 {item}
                 <span className="absolute bottom-1 left-4 right-4 h-px bg-gradient-to-r from-violet-500 to-cyan-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-full" />
