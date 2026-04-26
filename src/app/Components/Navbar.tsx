@@ -1,5 +1,7 @@
 import React from "react";
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+
 
 const Navbar = () => {
   return (
@@ -25,12 +27,14 @@ const Navbar = () => {
         </ul>
 
         <div className="flex items-center gap-3 shrink-0">
+          <Link href="/Cart">
           <button className="relative p-2 rounded-xl bg-violet-500/10 border border-violet-500/20 text-black/60 hover:text-black hover:bg-violet-500/20 hover:border-violet-400/40 transition-all duration-200 hover:scale-105 active:scale-95">
             <ShoppingCartIcon className="w-5 h-5" />
             <span className="absolute -top-1.5 -right-1.5 w-[18px] h-[18px] flex items-center justify-center text-[10px] font-bold rounded-full bg-gradient-to-br from-violet-500 to-fuchsia-400 text-white shadow-[0_2px_8px_rgba(139,92,246,0.6)]">
               3
             </span>
           </button>
+          </Link>
 
           <button className="px-5 py-2 text-xs font-bold tracking-widest uppercase rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 text-white hover:from-violet-500 hover:to-cyan-400 shadow-[0_4px_16px_rgba(109,40,217,0.4)] hover:shadow-[0_4px_24px_rgba(109,40,217,0.6)] transition-all duration-200 hover:scale-[1.03] active:scale-95">
             Shop Now

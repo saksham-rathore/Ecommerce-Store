@@ -7,7 +7,7 @@ type CartItem = {
   qty: number;
 };
 
-const Cart = ({ cartItems }: { cartItems: CartItem[] }) => {
+const CartPage = ({ cartItems }: { cartItems: CartItem[] }) => {
   return (
     <div>
       {cartItems.map((item) => (
@@ -20,4 +20,4 @@ const Cart = ({ cartItems }: { cartItems: CartItem[] }) => {
   );
 };
 
-export default Cart;
+export default CartPage;
