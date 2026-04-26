@@ -1,12 +1,23 @@
-import React from 'react'
-import { useState } from 'react'
+import React from "react";
 
-const Cart = () => {
-    const [Cartitems, setCartitems] = useState<{id: number; name: string; price: number; image: string; qty: number}[]>([]);
+type CartItem = {
+  id: number;
+  name: string;
+  price: number;
+  qty: number;
+};
+
+const Cart = ({ cartItems }: { cartItems: CartItem[] }) => {
   return (
-    <div>Cart</div>
-    
-  )
-}
+    <div>
+      {cartItems.map((item) => (
+        <div key={item.id}>
+          <p>{item.name}</p>
+          <p>Qty: {item.qty}</p>
+        </div>
+      ))}
+    </div>
+  );
+};
 
-export default Cart
+export default Cart;

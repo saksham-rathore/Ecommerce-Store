@@ -11,13 +11,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Scales />
-        <div className="max-w-7xl mx-auto">
-          <Navbar />
-          <Products />
-        </div>
+      <body className="max-w-7xl mx-auto">
         <Scales />
+        <Navbar />
+        <Products />
         {children}
+        <Scales />
+      </body>
     </html>
   );
 }
