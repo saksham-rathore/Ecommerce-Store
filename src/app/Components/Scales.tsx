@@ -1,6 +1,6 @@
 import React from "react";
 
-const Scales = () => {
+const Scales: React.FC = () => {
   return (
     <div>
       <div className="relative w-full overflow-hidden [--pattern:var(--color-neutral-200)]">

@@ -1,8 +1,10 @@
 import React from "react";
 import Link from "next/link";
 
+type NavItem = string;
 
-const Navbar = () => {
+const Navbar: React.FC = () => {
+  const navLinks: NavItem[] = ["New In", "Collections", "Women", "Men", "About"];
   return (
     <header className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-4">
       <nav className="w-full max-w-5xl flex items-center justify-between gap-8 px-6 py-3 rounded-2xl border border-violet-500/20 shadow-[0_8px_32px_rgba(109,40,217,0.25)]">
@@ -12,7 +14,7 @@ const Navbar = () => {
         </span>
 
         <ul className="flex items-center gap-1">
-          {["New In", "Collections", "Women", "Men", "About"].map((item) => (
+          {navLinks.map((item: NavItem) => (
             <li key={item}>
               <a
                 href="#"

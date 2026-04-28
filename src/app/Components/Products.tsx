@@ -1,11 +1,21 @@
 "use client";
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 
-const Products = () => {
-  const [addtocart, setaddtocart] = useState<{id: number; name: string; price: number; image: string; qty: number}[]>([]);
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+  image: string;
+}
 
-  const cart = (product: {id: number; name: string; price: number; image: string}) => {
+interface CartItem extends Product {
+  qty: number;
+}
+
+const Products: React.FC = () => {
+  const [addtocart, setaddtocart] = useState<CartItem[]>([]);
+
+  const cart = (product: Product): void => {
     setaddtocart((prev) => {
       const exist = prev.find((item) => item.id === product.id);
 
@@ -19,7 +29,7 @@ const Products = () => {
     });
   };
 
-  const Products = [
+  const Products: Product[] = [
     {
       id: 16345,
       name: "Shoes",
