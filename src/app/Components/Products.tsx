@@ -1,11 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
-const getProducts = async () => {
-  const response = await axios.get("http://localhost:5000/user/getallproducts");
-  console.log("✅ Products fetched:", response.data);
-}
+import { getAllProducts } from "../Services/Api";
 
 interface Product {
   id: number;
@@ -18,20 +14,37 @@ interface CartItem extends Product {
   qty: number;
 }
 
-
 const Products: React.FC = () => {
   const [addtocart, setaddtocart] = useState<CartItem[]>([]);
 
+  // useEffect(() => {
+  //   const getProducts = async (): Promise<void> => {
+  //     try {
+  //       const response = await axios.get("http://localhost:5000/user/getallproducts");
+  //       console.log("✅ Products fetched:", response.data);
+  //     } catch (error) {
+  //       console.error("❌ API call failed:", error);
+  //     }
+  //   };
+  //   getProducts();
+  // }, []);
+
+  const getAllProducts = async () => {
+    try {
+      const res = await fetch("http://localhost:5000/user/getallproducts");
+
+      const data = await res.json();
+
+      console.log("✅ Products:", data);
+    } catch (error) {
+      console.error("❌ Error:", error);
+    }
+  };
+
+  import { useEffect } from "react";
+
   useEffect(() => {
-    const getProducts = async (): Promise<void> => {
-      try {
-        const response = await axios.get("http://localhost:3000/api/getallproducts");
-        console.log("✅ Products fetched:", response.data);
-      } catch (error) {
-        console.error("❌ API call failed:", error);
-      }
-    };
-    getProducts();
+    getAllProducts();
   }, []);
 
   const cart = (product: Product): void => {
@@ -111,15 +124,19 @@ const Products: React.FC = () => {
       price: 299,
       image:
         "https://images.unsplash.com/photo-1544003484-3cd181d17917?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    }
+    },
   ];
 
   return (
     <section className="px-6 py-10">
       {/* Section heading */}
       <div className="mb-8 text-center">
-        <h2 className="text-3xl font-bold tracking-tight text-gray-900">Our Products</h2>
-        <p className="mt-1 text-sm text-gray-500">Tap any card to add it to your cart</p>
+        <h2 className="text-3xl font-bold tracking-tight text-gray-900">
+          Our Products
+        </h2>
+        <p className="mt-1 text-sm text-gray-500">
+          Tap any card to add it to your cart
+        </p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -140,8 +157,12 @@ const Products: React.FC = () => {
             {/* Card body */}
             <div className="p-4 flex flex-col gap-3">
               <div className="flex items-start justify-between">
-                <h3 className="text-base font-semibold text-gray-800">{Product.name}</h3>
-                <span className="text-sm font-bold text-violet-600">₹{Product.price.toLocaleString()}</span>
+                <h3 className="text-base font-semibold text-gray-800">
+                  {Product.name}
+                </h3>
+                <span className="text-sm font-bold text-violet-600">
+                  ₹{Product.price.toLocaleString()}
+                </span>
               </div>
 
               {/* Add to Cart */}
