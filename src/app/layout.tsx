@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
 import Navbar from "@/app/Components/Navbar";
 import "./globals.css";
-import Products from "./Components/Products";
-import Scales from "./Components/Scales"
+import Scales from "./Components/Scales";
+
+export const metadata: Metadata = {
+  title: "AUREL – Premium E-Commerce",
+  description: "Shop the finest products at AUREL.",
+};
 
 export default function RootLayout({
   children,
@@ -14,7 +18,6 @@ export default function RootLayout({
       <body className="max-w-7xl mx-auto">
         <Scales />
         <Navbar />
-        <Products />
         {children}
         <Scales />
       </body>

@@ -1,9 +1,9 @@
-import React from 'react'
+import Products from "@/app/Components/Products";
 
-const page = () => {
+export default function Home() {
   return (
-    <div></div>
-  )
+    <main>
+      <Products />
+    </main>
+  );
 }
-
-export default page
