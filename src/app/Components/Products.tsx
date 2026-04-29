@@ -1,5 +1,11 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+
+const getProducts = async () => {
+  const response = await axios.get("http://localhost:5000/user/getallproducts");
+  console.log("✅ Products fetched:", response.data);
+}
 
 interface Product {
   id: number;
@@ -12,8 +18,21 @@ interface CartItem extends Product {
   qty: number;
 }
 
+
 const Products: React.FC = () => {
   const [addtocart, setaddtocart] = useState<CartItem[]>([]);
+
+  useEffect(() => {
+    const getProducts = async (): Promise<void> => {
+      try {
+        const response = await axios.get("http://localhost:3000/api/getallproducts");
+        console.log("✅ Products fetched:", response.data);
+      } catch (error) {
+        console.error("❌ API call failed:", error);
+      }
+    };
+    getProducts();
+  }, []);
 
   const cart = (product: Product): void => {
     setaddtocart((prev) => {
