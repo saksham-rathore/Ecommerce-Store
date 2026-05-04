@@ -1,4 +1,4 @@
-import { NextAuthOptions } from "next-auth";
+import { NextAuthOptions, User } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import dbConnect from "@/lib/dbconnect";
@@ -12,12 +12,13 @@ export const authOptions: NextAuthOptions = {
       id: "credentials",
       name: "Credentials",
       credentials: {
-        email: { label: "email", type: "text" },
+        identifier: { label: "Email or Username", type: "text" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials: any): Promise<any> {
+      async authorize(credentials: Record<"identifier" | "password", string> | undefined): Promise<User | null> {
         await dbConnect();
         try {
+          if (!credentials) throw new Error("Credentials are required");
           const user = await UserModel.findOne({
             $or: [
               { email: credentials.identifier },
@@ -33,12 +34,17 @@ export const authOptions: NextAuthOptions = {
           );
 
           if (isPasswordCorrect) {
-            return user;
+            return {
+              _id: user._id.toString(),
+              email: user.email,
+              username: user.Username,
+              isAcceptingMessage: user.isAcceptingMessage,
+            } as User;
           } else {
             throw new Error("Incorrect Password!");
           }
-        } catch (err: any) {
-          throw new Error(err);
+        } catch (err: unknown) {
+          throw new Error(err instanceof Error ? err.message : String(err));
         }
       },
     }),
@@ -46,17 +52,19 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async session({ session, token }: { session: Session; token: JWT }) {
       if (token) {
-        session.user._id = token._id
-        session.user.isAcceptingMessage = token.isAcceptingMessage as boolean | undefined;
-        session.user.username = token.username
+        session.user._id = token._id;
+        session.user.isAcceptingMessage = token.isAcceptingMessage as
+          | boolean
+          | undefined;
+        session.user.username = token.username;
       }
       return session;
     },
     async jwt({ token, user }) {
       if (user) {
-        token._id = user._id?.toString()
+        token._id = user._id?.toString();
         token.isAcceptingMessage = user.isAcceptingMessage;
-        token.username = user.username
+        token.username = user.username;
       }
       return token;
     },
