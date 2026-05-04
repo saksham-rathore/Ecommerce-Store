@@ -1,11 +1,13 @@
-import React from 'react'
+"use client";
 
-const App = () => {
-  return (
-    <div>
-      
-    </div>
-  )
+import { SessionProvider } from "next-auth/react";
+
+interface AppProps {
+  children: React.ReactNode;
 }
 
-export default App
+const App = ({ children }: AppProps) => {
+  return <SessionProvider>{children}</SessionProvider>;
+};
+
+export default App;
