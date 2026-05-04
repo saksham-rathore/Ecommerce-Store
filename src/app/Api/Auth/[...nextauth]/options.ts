@@ -29,7 +29,7 @@ export const authOptions: NextAuthOptions = {
           }
           const isPasswordCorrect = await bcrypt.compare(
             credentials.password,
-            user.password
+            user.password,
           );
 
           if (isPasswordCorrect) {
