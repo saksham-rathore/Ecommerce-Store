@@ -8,11 +8,6 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-export const metadata: Metadata = {
-  title: "Aurel — Premium E-Commerce",
-  description: "Discover premium products curated for the modern lifestyle.",
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{
